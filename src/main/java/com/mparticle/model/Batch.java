@@ -18,6 +18,10 @@ public class Batch {
   @SerializedName(SERIALIZED_NAME_SOURCE_REQUEST_ID)
   private String sourceRequestId;
 
+  public static final String SERIALIZED_NAME_CONTEXT = "context";
+  @SerializedName(SERIALIZED_NAME_CONTEXT)
+  private Context context;
+
   public static final String SERIALIZED_NAME_EVENTS = "events";
   @SerializedName(SERIALIZED_NAME_EVENTS)
   private List<Object> events = new ArrayList<Object>();
@@ -157,9 +161,24 @@ public class Batch {
   public String getSourceRequestId() {
     return sourceRequestId;
   }
-
+  
   public void setSourceRequestId(String sourceRequestId) {
     this.sourceRequestId = sourceRequestId;
+  }
+
+  public Batch context(Context context) {
+    this.context = context;
+    return this;
+  }
+
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  public Context getContext() {
+    return context;
+  }
+
+  public void setContext(Context context) {
+    this.context = context;
   }
 
   public Batch events(List<Object> events) {
@@ -611,6 +630,7 @@ public class Batch {
     }
     Batch batch = (Batch) o;
     return Objects.equals(this.sourceRequestId, batch.sourceRequestId) &&
+        Objects.equals(this.context, batch.context) &&
         Objects.equals(this.events, batch.events) &&
         Objects.equals(this.deviceInfo, batch.deviceInfo) &&
         Objects.equals(this.applicationInfo, batch.applicationInfo) &&
@@ -636,7 +656,7 @@ public class Batch {
 
   @Override
   public int hashCode() {
-    return Objects.hash(sourceRequestId, events, deviceInfo, applicationInfo, userAttributes, deletedUserAttributes, userIdentities, environment, apiKey, apiKeys, ip, integrationAttributes, partnerIdentity, sourceInfo, mpDeviceid, attributionInfo, timestampUnixtimeMs, batchId, mpid, sdkVersion, consentState, jobId);
+    return Objects.hash(sourceRequestId, context, events, deviceInfo, applicationInfo, userAttributes, deletedUserAttributes, userIdentities, environment, apiKey, apiKeys, ip, integrationAttributes, partnerIdentity, sourceInfo, mpDeviceid, attributionInfo, timestampUnixtimeMs, batchId, mpid, sdkVersion, consentState, jobId);
   }
 
 
@@ -645,6 +665,7 @@ public class Batch {
     StringBuilder sb = new StringBuilder();
     sb.append("class Batch {\n");
     sb.append("    sourceRequestId: ").append(toIndentedString(sourceRequestId)).append("\n");
+    sb.append("    context: ").append(toIndentedString(context)).append("\n");
     sb.append("    events: ").append(toIndentedString(events)).append("\n");
     sb.append("    deviceInfo: ").append(toIndentedString(deviceInfo)).append("\n");
     sb.append("    applicationInfo: ").append(toIndentedString(applicationInfo)).append("\n");

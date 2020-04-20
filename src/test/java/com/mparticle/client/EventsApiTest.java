@@ -33,6 +33,7 @@ public class EventsApiTest {
     public void uploadUserIdentitiesAndAttributes() throws Exception {
         List<Batch> bulk = new ArrayList<>();
         Batch batch = new Batch();
+
         batch.environment(Batch.Environment.DEVELOPMENT);
         batch.userIdentities(new UserIdentities()
                 .customerId("1234")
@@ -95,6 +96,14 @@ public class EventsApiTest {
     public void uploadScreenEventTest() throws Exception {
         List<Batch> bulk = new ArrayList<>();
         Batch batch = new Batch();
+
+        Context context = new Context();
+        DataPlanContext dpContext = new DataPlanContext();
+        dpContext.planId("mobile_data_plan");
+        dpContext.planVersion(2);
+        context.dataPlan(dpContext);
+        batch.context(context);
+        
         batch.environment(Batch.Environment.DEVELOPMENT);
         ScreenViewEvent event = new ScreenViewEvent().data(
                 new ScreenViewEventData()
