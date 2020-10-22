@@ -86,9 +86,9 @@ public class UserIdentities {
   @SerializedName(SERIALIZED_NAME_OTHER_ID10)
   private String otherId10;
 
-  public static final String SERIALIZED_NAME_MOBILE_PHONE = "mobile_phone";
-  @SerializedName(SERIALIZED_NAME_MOBILE_PHONE)
-  private String mobilePhone;
+  public static final String SERIALIZED_NAME_MOBILE_NUMBER = "mobile_number";
+  @SerializedName(SERIALIZED_NAME_MOBILE_NUMBER)
+  private String mobileNumber;
 
   public static final String SERIALIZED_NAME_PHONE_NUMBER_2 = "phone_number_2";
   @SerializedName(SERIALIZED_NAME_PHONE_NUMBER_2)
@@ -497,23 +497,23 @@ public class UserIdentities {
     this.phoneNumber3 = phoneNumber3;
   }
 
-  public UserIdentities mobilePhone(String mobilePhone) {
-    this.mobilePhone = mobilePhone;
+  public UserIdentities mobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
     return this;
   }
 
   /**
-   * Get mobilePhone
-   * @return mobilePhone
+   * Get mobileNumber
+   * @return mobileNumber
    **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  public String getMobilePhone() {
-    return mobilePhone;
+  public String getMobileNumber() {
+    return mobileNumber;
   }
 
-  public void setMobilePhone(String mobilePhone) {
-    this.mobilePhone = mobilePhone;
+  public void setMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
   }
 
   @Override
@@ -546,13 +546,13 @@ public class UserIdentities {
         Objects.equals(this.otherId10, userIdentities.otherId10) &&
         Objects.equals(this.phoneNumber2, userIdentities.phoneNumber2) &&
         Objects.equals(this.phoneNumber3, userIdentities.phoneNumber3) &&
-        Objects.equals(this.mobilePhone, userIdentities.mobilePhone);
+        Objects.equals(this.mobileNumber, userIdentities.mobileNumber);
 
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(other, customerId, facebook, twitter, google, microsoft, yahoo, email, alias, facebookCustomAudienceId, otherId2, otherId3, otherId4, otherId5, otherId6, otherId7, otherId8, otherId9, otherId10, phoneNumber2, phoneNumber3, mobilePhone);
+    return Objects.hash(other, customerId, facebook, twitter, google, microsoft, yahoo, email, alias, facebookCustomAudienceId, otherId2, otherId3, otherId4, otherId5, otherId6, otherId7, otherId8, otherId9, otherId10, phoneNumber2, phoneNumber3, mobileNumber);
   }
 
 
@@ -581,7 +581,7 @@ public class UserIdentities {
     sb.append("    otherId10: ").append(toIndentedString(otherId10)).append("\n");
     sb.append("    phoneNumber2: ").append(toIndentedString(phoneNumber2)).append("\n");
     sb.append("    phoneNumber3: ").append(toIndentedString(phoneNumber3)).append("\n");
-    sb.append("    mobilePhone: ").append(toIndentedString(mobilePhone)).append("\n");
+    sb.append("    mobileNumber: ").append(toIndentedString(mobileNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

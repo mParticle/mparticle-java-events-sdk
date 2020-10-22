@@ -24,7 +24,7 @@ public class EventsApiTest {
 
     @Before
     public void setup() {
-        api = new ApiClient("foo-key", "bar-secret")
+        api = new ApiClient("foo-key", "foo-secret")
                 .createService(EventsApi.class);
     }
 
@@ -38,7 +38,8 @@ public class EventsApiTest {
         batch.userIdentities(new UserIdentities()
                 .customerId("1234")
                 .email("example@foo.com")
-                .mobilePhone("555-123-4567")
+                .phoneNumber2("5515-123-4567")
+                .phoneNumber3("5155-123-4567")
         );
 
 
@@ -104,7 +105,14 @@ public class EventsApiTest {
         dpContext.planVersion(2);
         context.dataPlan(dpContext);
         batch.context(context);
-        
+        batch.userIdentities(new UserIdentities()
+                .customerId("1234lololol")
+                .email("example@foo.com")
+                .phoneNumber2("5515-123-4567")
+                .phoneNumber3("5155-123-4567")
+
+        );
+
         batch.environment(Batch.Environment.DEVELOPMENT);
         ScreenViewEvent event = new ScreenViewEvent().data(
                 new ScreenViewEventData()
@@ -129,10 +137,18 @@ public class EventsApiTest {
     }
 
     @Test
-    public void uploadPurchaseEventt() throws Exception {
+    public void uploadPurchaseEvent() throws Exception {
         List<Batch> bulk = new ArrayList<>();
         Batch batch = new Batch();
         batch.environment(Batch.Environment.DEVELOPMENT);
+        batch.userIdentities(new UserIdentities()
+                .customerId("1234")
+                .email("example@foo.com")
+                .mobileNumber("123-456-7891")
+                .phoneNumber2("5515-123-4567")
+                .phoneNumber3("5155-123-4567")
+        );
+
         Product product = new Product().totalProductAmount(
                 new BigDecimal("123.12"))
                 .id("product-id")

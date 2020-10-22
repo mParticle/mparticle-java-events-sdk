@@ -43,7 +43,7 @@ public enum IdentityType {
 
   OTHER_ID_10("other_id_10"),
 
-  MOBILE_PHONE("mobile_phone"),
+  MOBILE_NUMBER("mobile_number"),
 
   PHONE_NUMBER_2("phone_number_2"),
 
