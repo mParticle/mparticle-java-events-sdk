@@ -197,7 +197,7 @@ public class DeviceInformation {
   /**
    * Gets or Sets attAuthorizationStatus
    */
-  public enum ATTStatusEnum {
+  public enum ATTStatus {
     AUTHORIZED("authorized"),
     
     DENIED("denied"),
@@ -208,7 +208,7 @@ public class DeviceInformation {
 
     private String value;
 
-    ATTStatusEnum(String value) {
+    ATTStatus(String value) {
       this.value = value;
     }
 
@@ -221,8 +221,8 @@ public class DeviceInformation {
       return String.valueOf(value);
     }
 
-    public static ATTStatusEnum fromValue(String value) {
-      for (ATTStatusEnum b : ATTStatusEnum.values()) {
+    public static ATTStatus fromValue(String value) {
+      for (ATTStatus b : ATTStatus.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -233,7 +233,7 @@ public class DeviceInformation {
 
   public static final String SERIALIZED_NAME_ATT_AUTHORIZATION_STATUS = "att_authorization_status";
   @SerializedName(SERIALIZED_NAME_ATT_AUTHORIZATION_STATUS)
-  private ATTStatusEnum attAuthorizationStatus;
+  private ATTStatus attAuthorizationStatus;
 
   public static final String SERIALIZED_NAME_IOS_IDFV = "ios_idfv";
   @SerializedName(SERIALIZED_NAME_IOS_IDFV)
@@ -906,7 +906,7 @@ public class DeviceInformation {
     this.attTimestampUnixtimeMs = attTimestampUnixtimeMs;
   }
 
-  public DeviceInformation attAuthorizationStatus(ATTStatusEnum attAuthorizationStatus) {
+  public DeviceInformation attAuthorizationStatus(ATTStatus attAuthorizationStatus) {
     this.attAuthorizationStatus = attAuthorizationStatus;
     return this;
   }
@@ -917,11 +917,11 @@ public class DeviceInformation {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  public ATTStatusEnum getATTAuthorizationStatus() {
+  public ATTStatus getATTAuthorizationStatus() {
     return attAuthorizationStatus;
   }
 
-  public void setATTAuthorizationStatus(ATTStatusEnum attAuthorizationStatus) {
+  public void setATTAuthorizationStatus(ATTStatus attAuthorizationStatus) {
     this.attAuthorizationStatus = attAuthorizationStatus;
   }
 

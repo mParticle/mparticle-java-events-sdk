@@ -52,7 +52,7 @@ public class EventsApiTest {
                 new DeviceInformation()
                         .iosAdvertisingId("5864e6b0-0d46-4667-a463-21d9493b6c10")
                         .attTimestampUnixtimeMs((long) 500006)
-                        .attAuthorizationStatus(DeviceInformation.ATTStatusEnum.AUTHORIZED)
+                        .attAuthorizationStatus(DeviceInformation.ATTStatus.AUTHORIZED)
         );
         bulk.add(batch);
         Gson gson = new Gson();
