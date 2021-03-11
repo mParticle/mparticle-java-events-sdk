@@ -190,6 +190,51 @@ public class DeviceInformation {
   @SerializedName(SERIALIZED_NAME_BLUETOOTH_VERSION)
   private String bluetoothVersion;
 
+  public static final String SERIALIZED_NAME_ATT_TIMESTAMP_UNIXTIME_MS = "att_timestamp_unixtime_ms";
+  @SerializedName(SERIALIZED_NAME_ATT_TIMESTAMP_UNIXTIME_MS)
+  private Long attTimestampUnixtimeMs;
+
+  /**
+   * Gets or Sets attAuthorizationStatus
+   */
+  public enum ATTStatusEnum {
+    AUTHORIZED("authorized"),
+    
+    DENIED("denied"),
+    
+    NOT_DETERMINED("not_determined"),
+    
+    RESTRICTED("restricted");
+
+    private String value;
+
+    ATTStatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static ATTStatusEnum fromValue(String value) {
+      for (ATTStatusEnum b : ATTStatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ATT_AUTHORIZATION_STATUS = "att_authorization_status";
+  @SerializedName(SERIALIZED_NAME_ATT_AUTHORIZATION_STATUS)
+  private ATTStatusEnum attAuthorizationStatus;
+
   public static final String SERIALIZED_NAME_IOS_IDFV = "ios_idfv";
   @SerializedName(SERIALIZED_NAME_IOS_IDFV)
   private String iosIdfv;
@@ -842,6 +887,44 @@ public class DeviceInformation {
     this.bluetoothVersion = bluetoothVersion;
   }
 
+  public DeviceInformation attTimestampUnixtimeMs(Long attTimestampUnixtimeMs) {
+    this.attTimestampUnixtimeMs = attTimestampUnixtimeMs;
+    return this;
+  }
+
+   /**
+   * Get attTimestampUnixtimeMs
+   * @return attTimestampUnixtimeMs
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  public Long getATTTimestampUnixtimeMs() {
+    return attTimestampUnixtimeMs;
+  }
+
+  public void setATTTimestampUnixtimeMs(Long attTimestampUnixtimeMs) {
+    this.attTimestampUnixtimeMs = attTimestampUnixtimeMs;
+  }
+
+  public DeviceInformation attAuthorizationStatus(ATTStatusEnum attAuthorizationStatus) {
+    this.attAuthorizationStatus = attAuthorizationStatus;
+    return this;
+  }
+
+   /**
+   * Get attAuthorizationStatus
+   * @return attAuthorizationStatus
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  public ATTStatusEnum getATTAuthorizationStatus() {
+    return attAuthorizationStatus;
+  }
+
+  public void setATTAuthorizationStatus(ATTStatusEnum attAuthorizationStatus) {
+    this.attAuthorizationStatus = attAuthorizationStatus;
+  }
+
   public DeviceInformation iosIdfv(String iosIdfv) {
     this.iosIdfv = iosIdfv;
     return this;
@@ -1093,6 +1176,8 @@ public class DeviceInformation {
         Objects.equals(this.hasNfc, deviceInformation.hasNfc) &&
         Objects.equals(this.bluetoothEnabled, deviceInformation.bluetoothEnabled) &&
         Objects.equals(this.bluetoothVersion, deviceInformation.bluetoothVersion) &&
+        Objects.equals(this.attTimestampUnixtimeMs, deviceInformation.attTimestampUnixtimeMs) &&
+        Objects.equals(this.attAuthorizationStatus, deviceInformation.attAuthorizationStatus) &&
         Objects.equals(this.iosIdfv, deviceInformation.iosIdfv) &&
         Objects.equals(this.androidAdvertisingId, deviceInformation.androidAdvertisingId) &&
         Objects.equals(this.buildVersionRelease, deviceInformation.buildVersionRelease) &&
@@ -1108,7 +1193,7 @@ public class DeviceInformation {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brand, product, device, androidUuid, deviceManufacturer, platform, osVersion, deviceModel, screenHeight, screenWidth, screenDpi, deviceCountry, localeLanguage, localeCountry, networkCountry, networkCarrier, networkCode, networkMobileCountryCode, timezoneOffset, buildIdentifier, httpHeaderUserAgent, iosAdvertisingId, pushToken, cpuArchitecture, isTablet, pushNotificationSoundEnabled, pushNotificationVibrateEnabled, radioAccessTechnology, supportsTelephony, hasNfc, bluetoothEnabled, bluetoothVersion, iosIdfv, androidAdvertisingId, buildVersionRelease, limitAdTracking, ampId, isDst, rokuAdvertisingId, rokuPublisherId, microsoftAdvertisingId, microsoftPublisherId, fireAdvertisingId);
+    return Objects.hash(brand, product, device, androidUuid, deviceManufacturer, platform, osVersion, deviceModel, screenHeight, screenWidth, screenDpi, deviceCountry, localeLanguage, localeCountry, networkCountry, networkCarrier, networkCode, networkMobileCountryCode, timezoneOffset, buildIdentifier, httpHeaderUserAgent, iosAdvertisingId, pushToken, cpuArchitecture, isTablet, pushNotificationSoundEnabled, pushNotificationVibrateEnabled, radioAccessTechnology, supportsTelephony, hasNfc, bluetoothEnabled, bluetoothVersion, attTimestampUnixtimeMs, attAuthorizationStatus, iosIdfv, androidAdvertisingId, buildVersionRelease, limitAdTracking, ampId, isDst, rokuAdvertisingId, rokuPublisherId, microsoftAdvertisingId, microsoftPublisherId, fireAdvertisingId);
   }
 
 
@@ -1148,6 +1233,8 @@ public class DeviceInformation {
     sb.append("    hasNfc: ").append(toIndentedString(hasNfc)).append("\n");
     sb.append("    bluetoothEnabled: ").append(toIndentedString(bluetoothEnabled)).append("\n");
     sb.append("    bluetoothVersion: ").append(toIndentedString(bluetoothVersion)).append("\n");
+    sb.append("    attTimestampUnixtimeMs: ").append(toIndentedString(attTimestampUnixtimeMs)).append("\n");
+    sb.append("    attAuthorizationStatus: ").append(toIndentedString(attAuthorizationStatus)).append("\n");
     sb.append("    iosIdfv: ").append(toIndentedString(iosIdfv)).append("\n");
     sb.append("    androidAdvertisingId: ").append(toIndentedString(androidAdvertisingId)).append("\n");
     sb.append("    buildVersionRelease: ").append(toIndentedString(buildVersionRelease)).append("\n");
