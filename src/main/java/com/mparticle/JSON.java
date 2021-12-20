@@ -47,6 +47,7 @@ class JSON {
         gson = createGson()
             .registerTypeAdapter(OffsetDateTime.class, offsetDateTimeTypeAdapter)
             .registerTypeAdapter(LocalDate.class, localDateTypeAdapter)
+            .serializeNulls()
             .create();
     }
 
