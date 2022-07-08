@@ -2,15 +2,8 @@ package com.mparticle;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+import com.mparticle.client.EventsApi;
 import com.mparticle.client.HttpBasicAuth;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Converter;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -18,12 +11,25 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 public class ApiClient {
 
   private Map<String, Interceptor> apiAuthorizations;
-  private OkHttpClient.Builder okBuilder;
+  private static OkHttpClient.Builder okBuilder;
   private Retrofit.Builder adapterBuilder;
   private JSON json;
+  private static Long retryAfter = null;
 
   /**
    * Create an API client with your mParticle API key and secret
@@ -55,6 +61,9 @@ public class ApiClient {
   }
 
   public <S> S createService(Class<S> serviceClass) {
+    if (serviceClass == EventsApi.class) {
+      okBuilder.addInterceptor(new RateLimitInterceptor());
+    }
     return adapterBuilder
       .client(okBuilder.build())
       .build()
@@ -129,6 +138,53 @@ public class ApiClient {
   public void configureFromOkclient(OkHttpClient okClient) {
     this.okBuilder = okClient.newBuilder();
     addAuthsToOkBuilder(this.okBuilder);
+  }
+
+  static class RateLimitInterceptor implements Interceptor {
+
+
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+      System.out.println("Starting request: " + chain.request().toString());
+      if (retryAfter != null && System.currentTimeMillis() < retryAfter) {
+        System.out.println("This endpoint is currently rate-limited, please retry after" + retryAfter + "ms, returning a local 429 response");
+        return new Response.Builder()
+                .request(chain.request())
+                .addHeader("RETRY_AFTER", retryAfter.toString())
+                .protocol(Protocol.HTTP_2)
+                .code(429)
+                .message("")
+                .body(ResponseBody.create(null, ""))
+                .build();
+      }
+
+      Response response = chain.proceed(chain.request());
+      System.out.println("Response " + response.code());
+      System.out.println(response);
+      if (response.code() == 429) {
+        //Most HttpUrlConnectionImpl's are case insensitive, but the interface
+        //doesn't actually restrict it so let's be safe and check.
+        String retryAfterString = response.header("Retry-After");
+        if (retryAfterString != null) {
+          retryAfterString = response.header("retry-after");
+        }
+        try {
+          if (retryAfterString == null) {
+            System.out.println("No Retry-After value found");
+          } else {
+            long parsedThrottle = Long.parseLong(retryAfterString) * 1000;
+            if (parsedThrottle > 0) {
+              retryAfter = System.currentTimeMillis() + parsedThrottle;
+              System.out.println("Retry-After value: " + parsedThrottle);
+              System.out.println("Next request may not be attempted for " + retryAfter + "ms");
+            }
+          }
+        } catch (NumberFormatException nfe) {
+          System.out.println("Unable to parse retry-after header, next request will not be rate-limited.");
+        }
+      }
+      return response;
+    }
   }
 }
 

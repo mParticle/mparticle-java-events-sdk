@@ -3,7 +3,7 @@ apply plugin: 'java'
 group = 'com.mparticle'
 version = '2.3.3'
 
-apply from: 'scripts/maven.gradle'
+apply from: '.scripts/maven.gradle'
 
 buildscript {
     repositories {
