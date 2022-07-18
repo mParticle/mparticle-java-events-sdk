@@ -32,10 +32,17 @@ module.exports = {
         changelogFile: "CHANGELOG.md",
       },
     ],
+    [
+      "@semantic-release/exec",
+      {
+        prepareCmd: "sh ./.scripts/release.sh ${nextRelease.version}",
+      },
+    ],
     ["@semantic-release/github"],
     [
       "@semantic-release/git",
       {
+        assets: ["CHANGELOG.md", "build.gradle", "README.md"],
         message:
           "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}",
       },
