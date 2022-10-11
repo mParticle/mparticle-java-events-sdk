@@ -30,7 +30,7 @@ jobs:
   semantic-release:
     name: "Semantic Release"
     needs: unit-test
-    runs-on: macos-11
+    runs-on: macos-latest
     env:
       GITHUB_TOKEN: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
       GIT_AUTHOR_NAME: mparticle-bot
@@ -85,7 +85,7 @@ jobs:
   sonatype-release:
     name: "Sonatype Release"
     needs: semantic-release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     env:
       sonatypeUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
       sonatypePassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
