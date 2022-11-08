@@ -6,10 +6,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Objects;
 
 /**
- * GDPRConsentState
+ * ConsentPurpose
  */
 
-public class GDPRConsentState {
+public class ConsentPurpose {
   public static final String SERIALIZED_NAME_REGULATION = "regulation";
   @SerializedName(SERIALIZED_NAME_REGULATION)
   private String regulation;
@@ -34,7 +34,7 @@ public class GDPRConsentState {
   @SerializedName(SERIALIZED_NAME_HARDWARE_ID)
   private String hardwareId;
 
-  public GDPRConsentState regulation(String regulation) {
+  public ConsentPurpose regulation(String regulation) {
     this.regulation = regulation;
     return this;
   }
@@ -52,7 +52,7 @@ public class GDPRConsentState {
     this.regulation = regulation;
   }
 
-  public GDPRConsentState document(String document) {
+  public ConsentPurpose document(String document) {
     this.document = document;
     return this;
   }
@@ -70,7 +70,7 @@ public class GDPRConsentState {
     this.document = document;
   }
 
-  public GDPRConsentState consented(Boolean consented) {
+  public ConsentPurpose consented(Boolean consented) {
     this.consented = consented;
     return this;
   }
@@ -88,7 +88,7 @@ public class GDPRConsentState {
     this.consented = consented;
   }
 
-  public GDPRConsentState timestampUnixtimeMs(Long timestampUnixtimeMs) {
+  public ConsentPurpose timestampUnixtimeMs(Long timestampUnixtimeMs) {
     this.timestampUnixtimeMs = timestampUnixtimeMs;
     return this;
   }
@@ -106,7 +106,7 @@ public class GDPRConsentState {
     this.timestampUnixtimeMs = timestampUnixtimeMs;
   }
 
-  public GDPRConsentState location(String location) {
+  public ConsentPurpose location(String location) {
     this.location = location;
     return this;
   }
@@ -124,7 +124,7 @@ public class GDPRConsentState {
     this.location = location;
   }
 
-  public GDPRConsentState hardwareId(String hardwareId) {
+  public ConsentPurpose hardwareId(String hardwareId) {
     this.hardwareId = hardwareId;
     return this;
   }
@@ -151,13 +151,13 @@ public class GDPRConsentState {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GDPRConsentState gdPRConsentState = (GDPRConsentState) o;
-    return Objects.equals(this.regulation, gdPRConsentState.regulation) &&
-        Objects.equals(this.document, gdPRConsentState.document) &&
-        Objects.equals(this.consented, gdPRConsentState.consented) &&
-        Objects.equals(this.timestampUnixtimeMs, gdPRConsentState.timestampUnixtimeMs) &&
-        Objects.equals(this.location, gdPRConsentState.location) &&
-        Objects.equals(this.hardwareId, gdPRConsentState.hardwareId);
+    ConsentPurpose purpose = (ConsentPurpose) o;
+    return Objects.equals(this.regulation, purpose.regulation) &&
+        Objects.equals(this.document, purpose.document) &&
+        Objects.equals(this.consented, purpose.consented) &&
+        Objects.equals(this.timestampUnixtimeMs, purpose.timestampUnixtimeMs) &&
+        Objects.equals(this.location, purpose.location) &&
+        Objects.equals(this.hardwareId, purpose.hardwareId);
   }
 
   @Override
@@ -169,7 +169,7 @@ public class GDPRConsentState {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class GDPRConsentState {\n");
+    sb.append("class ConsentPurpose {\n");
     sb.append("    regulation: ").append(toIndentedString(regulation)).append("\n");
     sb.append("    document: ").append(toIndentedString(document)).append("\n");
     sb.append("    consented: ").append(toIndentedString(consented)).append("\n");

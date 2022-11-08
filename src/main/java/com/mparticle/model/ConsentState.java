@@ -14,24 +14,44 @@ import java.util.Objects;
 public class ConsentState {
   public static final String SERIALIZED_NAME_GDPR = "gdpr";
   @SerializedName(SERIALIZED_NAME_GDPR)
-  private Map consentPurposes;
+  private Map gdprPurposes;
 
-  public ConsentState gdpr(String purposeName, GDPRConsentState gdpr) {
-    this.consentPurposes.put(purposeName, gdpr);
+  static final String CCPA_PURPOSE_NAME = "data_sale_opt_out";
+  public static final String SERIALIZED_NAME_CCPA = "ccpa";
+  @SerializedName(SERIALIZED_NAME_CCPA)
+  private Map ccpaPurposes;
+
+  public ConsentState gdpr(String purposeName, ConsentPurpose gdprPurpose) {
+    this.gdprPurposes.put(purposeName, gdprPurpose);
     return this;
   }
 
-   /**
+  /**
    * Get gdpr
-   * @return gdpr
-  **/
+   * @return gdprPurposes
+   **/
   @ApiModelProperty(required = true, value = "")
   public Map getGdpr() {
-    return consentPurposes;
+    return gdprPurposes;
   }
 
-  public void setGdpr(Map consentPurposes) {
-    this.consentPurposes = consentPurposes;
+  public void setGdpr(Map gdprPurposes) {
+    this.gdprPurposes = gdprPurposes;
+  }
+
+  /**
+   * Get ccpa
+   * @return ccpaPurposes
+   **/
+  @ApiModelProperty(required = true, value = "")
+  public Map getCcpa() {
+    return ccpaPurposes;
+  }
+
+  public void setCcpa(ConsentPurpose ccpaPurpose) {
+    Map ccpa = new HashMap<>();
+    ccpa.put(CCPA_PURPOSE_NAME, ccpaPurpose);
+    this.ccpaPurposes = ccpa;
   }
 
 
@@ -44,12 +64,13 @@ public class ConsentState {
       return false;
     }
     ConsentState consentState = (ConsentState) o;
-    return Objects.equals(this.consentPurposes, consentState.consentPurposes);
+    return Objects.equals(this.gdprPurposes, consentState.gdprPurposes)
+            && Objects.equals(this.ccpaPurposes, consentState.ccpaPurposes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(consentPurposes);
+    return Objects.hash(gdprPurposes, ccpaPurposes);
   }
 
 
@@ -57,7 +78,8 @@ public class ConsentState {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ConsentState {\n");
-    sb.append("    gdpr: ").append(toIndentedString(consentPurposes)).append("\n");
+    sb.append("    gdpr: ").append(toIndentedString(gdprPurposes)).append("\n");
+    sb.append("    ccpa: ").append(toIndentedString(ccpaPurposes)).append("\n");
     sb.append("}");
     return sb.toString();
   }
