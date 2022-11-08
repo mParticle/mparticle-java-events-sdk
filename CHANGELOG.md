@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.4.1...v2.5.0) (2022-11-08)
+
+
+### Features
+
+* Added CCPA consent support ([#14](https://github.com/mParticle/mparticle-java-events-sdk/issues/14)) ([b46979a](https://github.com/mParticle/mparticle-java-events-sdk/commit/b46979ab42328320184e67f9aca74ae29ddee031))
+
 ## [2.4.1](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.4.0...v2.4.1) (2022-10-11)
 
 
