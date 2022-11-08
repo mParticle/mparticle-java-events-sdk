@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: "Install JDK 11"
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: "zulu"
           java-version: "11"
@@ -41,13 +41,13 @@ jobs:
       GIT_COMMITTER_EMAIL: developers@mparticle.com
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.MP_SEMANTIC_RELEASE_BOT }}
           fetch-depth: 0
           ref: main
       - name: "Import GPG Key"
-        uses: crazy-max/ghaction-import-gpg@v4
+        uses: crazy-max/ghaction-import-gpg@v5
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
           passphrase: ${{ secrets.GPG_PASSPHRASE }}
@@ -97,14 +97,15 @@ jobs:
       mavenSigningKeyPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY_PASSWORD }}
     steps:
       - name: "Checkout Branch"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: main
       - name: "Install JDK 11"
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           distribution: "zulu"
           java-version: "11"
+          cache: "gradle"
       - name: "Publish"
         if: ${{ github.event.inputs.dryRun == 'false'}}
         run: |
