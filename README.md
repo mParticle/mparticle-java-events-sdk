@@ -223,6 +223,15 @@ Call<Void> singleResult = api.uploadEvents(batch);
 Response<Void> singleResponse = singleResult.execute();
 ```
 
+### Logging
+
+By default, logging is ignored.  Please implement your own LogHandler to handle log statements.
+
+```java
+Logger.setLogHandler(new DefaultLogHandler());
+Logger.info("Statement");
+```
+
 ### License
 
 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
