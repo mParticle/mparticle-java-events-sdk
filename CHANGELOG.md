@@ -1,3 +1,16 @@
+## [2.5.1](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.0...v2.5.1) (2022-11-16)
+
+
+### Bug Fixes
+
+* Remove System.out.println statements ([#16](https://github.com/mParticle/mparticle-java-events-sdk/issues/16)) ([41a65b3](https://github.com/mParticle/mparticle-java-events-sdk/commit/41a65b3a7811f794494d2ed7a399d72f815c7dac))
+
+
+### Updates & Maintenance
+
+* add -p conventional-changelog-conventionalcommits ([f4f5f11](https://github.com/mParticle/mparticle-java-events-sdk/commit/f4f5f11538e49bab4da70e834a494f0b6e3b3cf9))
+* Update github actions ([#15](https://github.com/mParticle/mparticle-java-events-sdk/issues/15)) ([9d2e468](https://github.com/mParticle/mparticle-java-events-sdk/commit/9d2e468a5daf5fd542e20d8ee5385b610d64335e))
+
 # [2.5.0](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.4.1...v2.5.0) (2022-11-08)
 
 
