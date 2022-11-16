@@ -17,7 +17,7 @@ Java 1.7 and later.
 
 ### Add the Dependency
 
-The SDK is available via Maven Central and jCenter.
+The SDK is available via Maven Central.
 
 #### Gradle
 

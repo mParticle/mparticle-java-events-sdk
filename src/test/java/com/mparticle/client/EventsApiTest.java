@@ -2,6 +2,7 @@ package com.mparticle.client;
 
 import com.google.gson.Gson;
 import com.mparticle.ApiClient;
+import com.mparticle.Logger;
 import com.mparticle.model.*;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,6 +29,18 @@ public class EventsApiTest {
                 .createService(EventsApi.class);
     }
 
+    @Test
+    public void logStringWtihLogger() {
+        Logger.setLogHandler(new DefaultLogHandler());
+        Logger.info("Test");
+        Assert.assertNotNull(Logger.getLogHandler());
+    }
+
+    @Test
+    public void logStringNoLogger() {
+        Logger.info("Test");
+        Assert.assertNull(Logger.getLogHandler());
+    }
 
     @Test
     public void uploadUserIdentitiesAndAttributes() throws Exception {
