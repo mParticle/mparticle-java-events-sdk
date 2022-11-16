@@ -17,7 +17,7 @@ Java 1.7 and later.
 
 ### Add the Dependency
 
-The SDK is available via Maven Central and jCenter.
+The SDK is available via Maven Central.
 
 #### Gradle
 
@@ -221,6 +221,15 @@ Response<Void> bulkResponse = bulkResult.execute();
 // Perform a single upload
 Call<Void> singleResult = api.uploadEvents(batch);
 Response<Void> singleResponse = singleResult.execute();
+```
+
+### Logging
+
+By default, logging is ignored.  Please implement your own LogHandler to handle log statements.
+
+```java
+Logger.setLogHandler(new DefaultLogHandler());
+Logger.info("Statement");
 ```
 
 ### License
