@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.1...v2.5.2) (2022-11-21)
+
+
+### Bug Fixes
+
+* Add in Logger.debug support ([#17](https://github.com/mParticle/mparticle-java-events-sdk/issues/17)) ([cb5847f](https://github.com/mParticle/mparticle-java-events-sdk/commit/cb5847f1baef65e2616c04ab971839f6ce649b49))
+
 ## [2.5.1](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.0...v2.5.1) (2022-11-16)
 
 
