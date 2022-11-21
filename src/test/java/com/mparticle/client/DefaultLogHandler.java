@@ -7,10 +7,15 @@ import org.slf4j.LoggerFactory;
 public class DefaultLogHandler extends AbstractLogHandler {
 
     private static final Logger Log = LoggerFactory.getLogger(DefaultLogHandler.class);
+
+    @Override
+    public void debug(String message) {
+        Log.debug(message);
+    }
+
     @Override
     public void info(String message) {
         Log.info(message);
-
     }
 
     @Override

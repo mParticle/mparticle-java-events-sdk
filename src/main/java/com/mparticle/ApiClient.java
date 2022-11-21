@@ -144,9 +144,9 @@ public class ApiClient {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-      Logger.info("Starting request: " + chain.request().toString());
+      Logger.debug("Starting request: " + chain.request().toString());
       if (retryAfter != null && System.currentTimeMillis() < retryAfter) {
-        Logger.info("This endpoint is currently rate-limited, please retry after" + retryAfter + "ms, returning a local 429 response");
+        Logger.debug("This endpoint is currently rate-limited, please retry after" + retryAfter + "ms, returning a local 429 response");
         return new Response.Builder()
                 .request(chain.request())
                 .addHeader("RETRY_AFTER", retryAfter.toString())
@@ -158,8 +158,8 @@ public class ApiClient {
       }
 
       Response response = chain.proceed(chain.request());
-      Logger.info("Response " + response.code());
-      Logger.info(String.valueOf(response));
+      Logger.debug("Response " + response.code());
+      Logger.debug(String.valueOf(response));
       if (response.code() == 429) {
         //Most HttpUrlConnectionImpl's are case insensitive, but the interface
         //doesn't actually restrict it so let's be safe and check.
@@ -169,17 +169,17 @@ public class ApiClient {
         }
         try {
           if (retryAfterString == null) {
-            Logger.info("No Retry-After value found");
+            Logger.debug("No Retry-After value found");
           } else {
             long parsedThrottle = Long.parseLong(retryAfterString) * 1000;
             if (parsedThrottle > 0) {
               retryAfter = System.currentTimeMillis() + parsedThrottle;
-              Logger.info("Retry-After value: " + parsedThrottle);
-              Logger.info("Next request may not be attempted for " + retryAfter + "ms");
+              Logger.debug("Retry-After value: " + parsedThrottle);
+              Logger.debug("Next request may not be attempted for " + retryAfter + "ms");
             }
           }
         } catch (NumberFormatException nfe) {
-          Logger.info("Unable to parse retry-after header, next request will not be rate-limited.");
+          Logger.debug("Unable to parse retry-after header, next request will not be rate-limited.");
         }
       }
       return response;

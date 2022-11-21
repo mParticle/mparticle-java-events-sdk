@@ -32,13 +32,13 @@ public class EventsApiTest {
     @Test
     public void logStringWtihLogger() {
         Logger.setLogHandler(new DefaultLogHandler());
-        Logger.info("Test");
+        Logger.debug("Test");
         Assert.assertNotNull(Logger.getLogHandler());
     }
 
     @Test
     public void logStringNoLogger() {
-        Logger.info("Test");
+        Logger.debug("Test");
         Assert.assertNull(Logger.getLogHandler());
     }
 

@@ -229,7 +229,7 @@ By default, logging is ignored.  Please implement your own LogHandler to handle 
 
 ```java
 Logger.setLogHandler(new DefaultLogHandler());
-Logger.info("Statement");
+Logger.debug("Statement");
 ```
 
 ### License
