@@ -1,3 +1,10 @@
+## [2.5.3](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.2...v2.5.3) (2023-01-04)
+
+
+### Bug Fixes
+
+* 429 handling response header ([#18](https://github.com/mParticle/mparticle-java-events-sdk/issues/18)) ([5bd4bac](https://github.com/mParticle/mparticle-java-events-sdk/commit/5bd4bacdfc18273c2da9001d721ce176856a1ffa))
+
 ## [2.5.2](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.1...v2.5.2) (2022-11-21)
 
 
