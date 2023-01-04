@@ -145,11 +145,13 @@ public class ApiClient {
     @Override
     public Response intercept(Chain chain) throws IOException {
       Logger.debug("Starting request: " + chain.request().toString());
-      if (retryAfter != null && System.currentTimeMillis() < retryAfter) {
-        Logger.debug("This endpoint is currently rate-limited, please retry after" + retryAfter + "ms, returning a local 429 response");
+      long currentTimeMillis = System.currentTimeMillis();
+      if (retryAfter != null && currentTimeMillis < retryAfter) {
+        Long retryAfterHeaderValue = (retryAfter - currentTimeMillis) / 1000;
+        Logger.debug("This endpoint is currently rate-limited, please retry after " + retryAfterHeaderValue + " seconds, returning a local 429 response");
         return new Response.Builder()
                 .request(chain.request())
-                .addHeader("RETRY_AFTER", retryAfter.toString())
+                .addHeader("retry-after", retryAfterHeaderValue.toString())
                 .protocol(Protocol.HTTP_2)
                 .code(429)
                 .message("")
@@ -174,8 +176,8 @@ public class ApiClient {
             long parsedThrottle = Long.parseLong(retryAfterString) * 1000;
             if (parsedThrottle > 0) {
               retryAfter = System.currentTimeMillis() + parsedThrottle;
-              Logger.debug("Retry-After value: " + parsedThrottle);
-              Logger.debug("Next request may not be attempted for " + retryAfter + "ms");
+              Logger.debug("Retry-After header value: " + retryAfterString);
+              Logger.debug("Next request may not be attempted for " + retryAfterString + " seconds");
             }
           }
         } catch (NumberFormatException nfe) {
