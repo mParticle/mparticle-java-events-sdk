@@ -1,3 +1,10 @@
+## [2.5.4](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.3...v2.5.4) (2023-10-15)
+
+
+### Bug Fixes
+
+* Update retrofit ([#19](https://github.com/mParticle/mparticle-java-events-sdk/issues/19)) ([bcdb225](https://github.com/mParticle/mparticle-java-events-sdk/commit/bcdb225201a47b0369502bb902c0037f3affc3bb))
+
 ## [2.5.3](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.2...v2.5.3) (2023-01-04)
 
 
