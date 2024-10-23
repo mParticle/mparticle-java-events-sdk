@@ -105,6 +105,10 @@ public class Batch {
   @SerializedName(SERIALIZED_NAME_PARTNER_IDENTITY)
   private String partnerIdentity;
 
+  public static final String SERIALIZED_NAME_PARTNER_IDENTITIES = "partner_identities";
+  @SerializedName(SERIALIZED_NAME_PARTNER_IDENTITIES)
+  private Map<String, String> partnerIdentities = new HashMap<>();
+
   public static final String SERIALIZED_NAME_SOURCE_INFO = "source_info";
   @SerializedName(SERIALIZED_NAME_SOURCE_INFO)
   private SourceInformation sourceInfo = null;
@@ -448,6 +452,25 @@ public class Batch {
     this.partnerIdentity = partnerIdentity;
   }
 
+  public Batch partnerIdentities(Map<String, String> partnerIdentities) {
+    this.partnerIdentities = partnerIdentities;
+    return this;
+  }
+
+  /**
+   * Get partnerIdentities
+   * @return partnerIdentities
+   **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  public Map<String, String> getPartnerIdentities() {
+    return partnerIdentities;
+  }
+
+  public void setPartnerIdentities(Map<String, String> partnerIdentities) {
+    this.partnerIdentities = partnerIdentities;
+  }
+
   public Batch sourceInfo(SourceInformation sourceInfo) {
     this.sourceInfo = sourceInfo;
     return this;
@@ -643,6 +666,7 @@ public class Batch {
         Objects.equals(this.ip, batch.ip) &&
         Objects.equals(this.integrationAttributes, batch.integrationAttributes) &&
         Objects.equals(this.partnerIdentity, batch.partnerIdentity) &&
+        Objects.equals(this.partnerIdentities, batch.partnerIdentities) &&
         Objects.equals(this.sourceInfo, batch.sourceInfo) &&
         Objects.equals(this.mpDeviceid, batch.mpDeviceid) &&
         Objects.equals(this.attributionInfo, batch.attributionInfo) &&
@@ -656,7 +680,7 @@ public class Batch {
 
   @Override
   public int hashCode() {
-    return Objects.hash(sourceRequestId, context, events, deviceInfo, applicationInfo, userAttributes, deletedUserAttributes, userIdentities, environment, apiKey, apiKeys, ip, integrationAttributes, partnerIdentity, sourceInfo, mpDeviceid, attributionInfo, timestampUnixtimeMs, batchId, mpid, sdkVersion, consentState, jobId);
+    return Objects.hash(sourceRequestId, context, events, deviceInfo, applicationInfo, userAttributes, deletedUserAttributes, userIdentities, environment, apiKey, apiKeys, ip, integrationAttributes, partnerIdentity, partnerIdentities, sourceInfo, mpDeviceid, attributionInfo, timestampUnixtimeMs, batchId, mpid, sdkVersion, consentState, jobId);
   }
 
 
@@ -678,6 +702,7 @@ public class Batch {
     sb.append("    ip: ").append(toIndentedString(ip)).append("\n");
     sb.append("    integrationAttributes: ").append(toIndentedString(integrationAttributes)).append("\n");
     sb.append("    partnerIdentity: ").append(toIndentedString(partnerIdentity)).append("\n");
+    sb.append("    partnerIdentities: ").append(toIndentedString(partnerIdentities)).append("\n");
     sb.append("    sourceInfo: ").append(toIndentedString(sourceInfo)).append("\n");
     sb.append("    mpDeviceid: ").append(toIndentedString(mpDeviceid)).append("\n");
     sb.append("    attributionInfo: ").append(toIndentedString(attributionInfo)).append("\n");
