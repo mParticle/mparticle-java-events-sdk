@@ -1,3 +1,15 @@
+## [2.6.0](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.4...v2.6.0) (2024-10-24)
+
+
+### Features
+
+* add getter and setter method for partner identities ([#20](https://github.com/mParticle/mparticle-java-events-sdk/issues/20)) ([810e19d](https://github.com/mParticle/mparticle-java-events-sdk/commit/810e19d7d23d3d02c381e38ec689d047e771ccaf))
+
+
+### Bug Fixes
+
+* pin conventional commits ([#21](https://github.com/mParticle/mparticle-java-events-sdk/issues/21)) ([2f70303](https://github.com/mParticle/mparticle-java-events-sdk/commit/2f70303f52b936ed075142f83a6d17fa07e51ed5))
+
 ## [2.5.4](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.3...v2.5.4) (2023-10-15)
 
 
