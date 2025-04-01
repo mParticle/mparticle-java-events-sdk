@@ -29,6 +29,7 @@ public class ApiClient {
   private Retrofit.Builder adapterBuilder;
   private JSON json;
   private static Long retryAfter = null;
+  private String baseUrl = "https://s2s.mparticle.com/v2";
 
   /**
    * Create an API client with your mParticle API key and secret
@@ -44,11 +45,15 @@ public class ApiClient {
     addAuthorization("basic", auth);
   }
 
+  public ApiClient(String apiKey, String apiSecret, String apiBaseUrl) {
+    this(apiKey, apiSecret);
+    this.baseUrl = apiBaseUrl;
+  }
+
   public void createDefaultAdapter() {
     json = new JSON();
     okBuilder = new OkHttpClient.Builder();
 
-    String baseUrl = "https://s2s.mparticle.com/v2";
     if (!baseUrl.endsWith("/"))
       baseUrl = baseUrl + "/";
 
