@@ -57,6 +57,10 @@ public class DeviceInformation {
     
     XBOX("xbox");
 
+    FIRE_TV("FireTV");
+
+    
+
     private String value;
 
     PlatformEnum(String value) {
