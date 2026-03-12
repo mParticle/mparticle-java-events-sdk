@@ -59,8 +59,6 @@ public class DeviceInformation {
 
     FIRE_TV("FireTV");
 
-    
-
     private String value;
 
     PlatformEnum(String value) {
