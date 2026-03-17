@@ -55,7 +55,9 @@ public class DeviceInformation {
     
     SMART_TV("smart_tv"),
     
-    XBOX("xbox");
+    XBOX("xbox"),
+
+    FIRE_TV("FireTV");
 
     private String value;
 
