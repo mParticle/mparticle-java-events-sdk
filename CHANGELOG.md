@@ -1,3 +1,10 @@
+## [2.7.0](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.6.0...v2.7.0) (2026-03-17)
+
+
+### Features
+
+* add FireTV to PlatformEnum ([#23](https://github.com/mParticle/mparticle-java-events-sdk/issues/23)) ([cdf80a2](https://github.com/mParticle/mparticle-java-events-sdk/commit/cdf80a2fbd184a9109b6ce500a88acf10b7e07aa))
+
 ## [2.6.0](https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.4...v2.6.0) (2024-10-24)
 
 
