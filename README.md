@@ -40,7 +40,7 @@ implementation 'com.mparticle:server-events-sdk:2.7.0'
 You can also install it locally and use it from a local Maven repository:
 
 ```sh
-./gradlew uploadArchives
+./gradlew publishToMavenLocal
 ```
 
 ## Create a `Batch`
