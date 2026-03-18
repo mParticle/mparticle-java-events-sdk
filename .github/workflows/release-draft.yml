@@ -62,6 +62,9 @@ jobs:
           cache: "gradle"
 
       - name: Smoke test - publish to Maven local
+        env:
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY_PASSWORD }}
         run: ./gradlew publishToMavenLocal -PVERSION=${{ steps.bump-version.outputs.new_version }}
 
       - name: Create Pull Request
