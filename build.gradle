@@ -1,15 +1,11 @@
-apply plugin: 'java'
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+}
 
 group = 'com.mparticle'
-version = '2.7.0'
-
-apply from: '.scripts/maven.gradle'
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
+version = project.hasProperty('VERSION') ? project.property('VERSION') : file('VERSION').text.trim()
 
 repositories {
     mavenCentral()
@@ -18,26 +14,15 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-task sdkJavadocs(type: Javadoc) {
-    source = sourceSets.main.allJava
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+javadoc {
     title = 'mParticle Server Events SDK API Reference'
-    failOnError false
-    getOptions().setNoTimestamp(true)
-}
-
-task javadocsJar(type: Jar, dependsOn: sdkJavadocs) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allJava
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocsJar
+    options.noTimestamp = true
+    failOnError = false
 }
 
 ext {
@@ -53,15 +38,66 @@ ext {
 }
 
 dependencies {
-    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
-    compile "com.squareup.retrofit2:converter-scalars:$retrofit_version"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    compile "io.swagger:swagger-annotations:$swagger_annotations_version"
-    compile "com.google.code.findbugs:jsr305:3.0.2"
-    compile "io.gsonfire:gson-fire:$json_fire_version"
-    compile "org.threeten:threetenbp:$threetenbp_version"
-    testCompile "junit:junit:$junit_version"
-    testCompile "ch.qos.logback:logback-core:$slf4j_core_version"
-    testCompile "ch.qos.logback:logback-classic:$slf4j_classic_version"
-    testCompile "org.slf4j:slf4j-api:$slf4j_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-scalars:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "io.swagger:swagger-annotations:$swagger_annotations_version"
+    api "com.google.code.findbugs:jsr305:3.0.2"
+    api "io.gsonfire:gson-fire:$json_fire_version"
+    api "org.threeten:threetenbp:$threetenbp_version"
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "ch.qos.logback:logback-core:$slf4j_core_version"
+    testImplementation "ch.qos.logback:logback-classic:$slf4j_classic_version"
+    testImplementation "org.slf4j:slf4j-api:$slf4j_version"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            groupId = 'com.mparticle'
+            artifactId = 'server-events-sdk'
+            pom {
+                name = 'mParticle server-side Java SDK'
+                description = 'mParticle SDK for server-side Java environments'
+                url = 'https://github.com/mparticle/mparticle-java-events-sdk'
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/license/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/mparticle/mparticle-java-events-sdk'
+                    connection = 'scm:git:https://github.com/mparticle/mparticle-java-events-sdk'
+                    developerConnection = 'scm:git:git@github.com:mparticle/mparticle-java-events-sdk.git'
+                }
+                developers {
+                    developer {
+                        id = 'mParticle'
+                        name = 'mParticle Inc.'
+                        email = 'developers@mparticle.com'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'sonatype'
+            url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
+            credentials {
+                username = System.getenv('sonatypeUsername')
+                password = System.getenv('sonatypePassword')
+            }
+        }
+    }
+}
+
+def signingKey = System.getenv('ORG_GRADLE_PROJECT_signingInMemoryKey')
+def signingPassword = System.getenv('ORG_GRADLE_PROJECT_signingInMemoryKeyPassword')
+signing {
+    required { gradle.taskGraph.hasTask('publishMavenPublicationToSonatypeRepository') }
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.maven
 }
