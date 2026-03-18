@@ -1,7 +1,6 @@
 plugins {
     id 'java-library'
-    id 'maven-publish'
-    id 'signing'
+    id 'com.vanniktech.maven.publish' version '0.30.0'
 }
 
 group = 'com.mparticle'
@@ -13,11 +12,6 @@ repositories {
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
 
 javadoc {
     title = 'mParticle Server Events SDK API Reference'
@@ -51,53 +45,33 @@ dependencies {
     testImplementation "org.slf4j:slf4j-api:$slf4j_version"
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-            groupId = 'com.mparticle'
-            artifactId = 'server-events-sdk'
-            pom {
-                name = 'mParticle server-side Java SDK'
-                description = 'mParticle SDK for server-side Java environments'
-                url = 'https://github.com/mparticle/mparticle-java-events-sdk'
-                licenses {
-                    license {
-                        name = 'The Apache Software License, Version 2.0'
-                        url = 'http://www.apache.org/license/LICENSE-2.0.txt'
-                    }
-                }
-                scm {
-                    url = 'https://github.com/mparticle/mparticle-java-events-sdk'
-                    connection = 'scm:git:https://github.com/mparticle/mparticle-java-events-sdk'
-                    developerConnection = 'scm:git:git@github.com:mparticle/mparticle-java-events-sdk.git'
-                }
-                developers {
-                    developer {
-                        id = 'mParticle'
-                        name = 'mParticle Inc.'
-                        email = 'developers@mparticle.com'
-                    }
-                }
-            }
-        }
-    }
-    repositories {
-        maven {
-            name = 'sonatype'
-            url = 'https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/'
-            credentials {
-                username = System.getenv('sonatypeUsername')
-                password = System.getenv('sonatypePassword')
-            }
-        }
-    }
-}
+mavenPublishing {
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 
-def signingKey = System.getenv('ORG_GRADLE_PROJECT_signingInMemoryKey')
-def signingPassword = System.getenv('ORG_GRADLE_PROJECT_signingInMemoryKeyPassword')
-signing {
-    required { gradle.taskGraph.hasTask('publishMavenPublicationToSonatypeRepository') }
-    useInMemoryPgpKeys(signingKey, signingPassword)
-    sign publishing.publications.maven
+    coordinates('com.mparticle', 'server-events-sdk', version.toString())
+
+    pom {
+        name = 'mParticle server-side Java SDK'
+        description = 'mParticle SDK for server-side Java environments'
+        url = 'https://github.com/mparticle/mparticle-java-events-sdk'
+        licenses {
+            license {
+                name = 'The Apache Software License, Version 2.0'
+                url = 'http://www.apache.org/license/LICENSE-2.0.txt'
+            }
+        }
+        scm {
+            url = 'https://github.com/mparticle/mparticle-java-events-sdk'
+            connection = 'scm:git:https://github.com/mparticle/mparticle-java-events-sdk'
+            developerConnection = 'scm:git:git@github.com:mparticle/mparticle-java-events-sdk.git'
+        }
+        developers {
+            developer {
+                id = 'mParticle'
+                name = 'mParticle Inc.'
+                email = 'developers@mparticle.com'
+            }
+        }
+    }
 }

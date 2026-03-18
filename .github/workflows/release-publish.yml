@@ -35,8 +35,8 @@ jobs:
     env:
       ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY }}
       ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY_PASSWORD }}
-      sonatypeUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-      sonatypePassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+      ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+      ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
           cache: "gradle"
 
       - name: Publish to Maven Central
-        run: ./gradlew publishMavenPublicationToSonatypeRepository -PVERSION=${{ steps.version.outputs.version }}
+        run: ./gradlew publishAndReleaseToMavenCentral -PVERSION=${{ steps.version.outputs.version }}
 
   create-github-release:
     name: Create GitHub Release
