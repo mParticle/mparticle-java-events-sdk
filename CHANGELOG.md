@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.0] - 2026-03-18
+
 ## [2.7.0] - 2026-03-17
 
 ### Added
@@ -71,7 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Don't remove attributes when value is set to null
 
-[Unreleased]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.7.0...HEAD
+[unreleased]: https://github.com/mParticle/mparticle-java-events-sdk/compare/2.7.0...HEAD
+[2.7.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.7.0...2.7.0
 [2.7.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.4...v2.6.0
 [2.5.4]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.3...v2.5.4
