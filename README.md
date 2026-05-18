@@ -223,6 +223,25 @@ Call<Void> singleResult = api.uploadEvents(batch);
 Response<Void> singleResponse = singleResult.execute();
 ```
 
+### User-Agent Header
+
+The SDK does not set a `User-Agent` header on outbound requests. OkHttp's default `User-Agent` (`okhttp/<version>`) is explicitly suppressed to prevent mParticle from enriching `device_info.http_header_user_agent` with a meaningless library-identifier string.
+
+If you need to send a custom `User-Agent`, add an OkHttp interceptor that sets the header:
+
+```java
+EventsApi api = new ApiClient("API KEY", "API-SECRET") {{
+    getOkBuilder().addInterceptor(chain -> {
+        okhttp3.Request request = chain.request().newBuilder()
+                .header("User-Agent", "my-app/1.0")
+                .build();
+        return chain.proceed(request);
+    });
+}}.createService(EventsApi.class);
+```
+
+The SDK's suppression only targets OkHttp's own default (`okhttp/<version>`); any other value is passed through unchanged.
+
 ### Logging
 
 By default, logging is ignored.  Please implement your own LogHandler to handle log statements.

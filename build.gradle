@@ -40,6 +40,7 @@ dependencies {
     api "io.gsonfire:gson-fire:$json_fire_version"
     api "org.threeten:threetenbp:$threetenbp_version"
     testImplementation "junit:junit:$junit_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:3.14.9"
     testImplementation "ch.qos.logback:logback-core:$slf4j_core_version"
     testImplementation "ch.qos.logback:logback-classic:$slf4j_classic_version"
     testImplementation "org.slf4j:slf4j-api:$slf4j_version"
