@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.8.0] - Unreleased
+
+### Fixed
+
+- `ApiClient` no longer leaks OkHttp's default `User-Agent` header (`okhttp/<version>`) on outbound requests. Requests now omit the `User-Agent` header entirely unless explicitly set by the caller. This resolves cases where mParticle was enriching `device_info.http_header_user_agent` with a meaningless library-identifier string. Caller-supplied values (set via a custom OkHttp interceptor) are preserved. See PR notes for version bump guidance.
+
 ## [2.7.0] - 2026-03-17
 
 ### Added
@@ -69,6 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Don't remove attributes when value is set to null
 
+[2.8.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.4...v2.6.0
 [2.5.4]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.5.3...v2.5.4
