@@ -14,6 +14,7 @@ import java.util.Map;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -47,6 +48,7 @@ public class ApiClient {
   public void createDefaultAdapter() {
     json = new JSON();
     okBuilder = new OkHttpClient.Builder();
+    okBuilder.addNetworkInterceptor(new UserAgentInterceptor());
 
     String baseUrl = "https://s2s.mparticle.com/v2";
     if (!baseUrl.endsWith("/"))
@@ -137,6 +139,25 @@ public class ApiClient {
   public void configureFromOkclient(OkHttpClient okClient) {
     this.okBuilder = okClient.newBuilder();
     addAuthsToOkBuilder(this.okBuilder);
+    this.okBuilder.addNetworkInterceptor(new UserAgentInterceptor());
+  }
+
+  // Applied as a network interceptor so it runs after OkHttp's BridgeInterceptor,
+  // which would otherwise inject "okhttp/<version>" whenever User-Agent is absent.
+  // Caller-supplied values (not starting with "okhttp/") are passed through unchanged.
+  static class UserAgentInterceptor implements Interceptor {
+    @Override
+    public Response intercept(Chain chain) throws IOException {
+      Request original = chain.request();
+      String ua = original.header("User-Agent");
+      if (ua != null && ua.startsWith("okhttp/")) {
+        Request stripped = original.newBuilder()
+            .removeHeader("User-Agent")
+            .build();
+        return chain.proceed(stripped);
+      }
+      return chain.proceed(original);
+    }
   }
 
   static class RateLimitInterceptor implements Interceptor {
