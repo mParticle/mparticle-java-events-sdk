@@ -57,7 +57,9 @@ public class DeviceInformation {
     
     XBOX("xbox"),
 
-    FIRE_TV("FireTV");
+    FIRE_TV("FireTV"),
+
+    SAMSUNG_TV("samsung_tv");
 
     private String value;
 
@@ -280,6 +282,10 @@ public class DeviceInformation {
   public static final String SERIALIZED_NAME_FIRE_ADVERTISING_ID = "fire_advertising_id";
   @SerializedName(SERIALIZED_NAME_FIRE_ADVERTISING_ID)
   private String fireAdvertisingId;
+
+  public static final String SERIALIZED_NAME_TIZEN_ADVERTISING_ID = "tizen_advertising_id";
+  @SerializedName(SERIALIZED_NAME_TIZEN_ADVERTISING_ID)
+  private String tizenAdvertisingId;
 
   public DeviceInformation brand(String brand) {
     this.brand = brand;
@@ -1136,6 +1142,25 @@ public class DeviceInformation {
     this.fireAdvertisingId = fireAdvertisingId;
   }
 
+  public DeviceInformation tizenAdvertisingId(String tizenAdvertisingId) {
+    this.tizenAdvertisingId = tizenAdvertisingId;
+    return this;
+  }
+
+   /**
+   * Get tizenAdvertisingId
+   * @return tizenAdvertisingId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+  public String getTizenAdvertisingId() {
+    return tizenAdvertisingId;
+  }
+
+  public void setTizenAdvertisingId(String tizenAdvertisingId) {
+    this.tizenAdvertisingId = tizenAdvertisingId;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -1190,12 +1215,13 @@ public class DeviceInformation {
         Objects.equals(this.rokuPublisherId, deviceInformation.rokuPublisherId) &&
         Objects.equals(this.microsoftAdvertisingId, deviceInformation.microsoftAdvertisingId) &&
         Objects.equals(this.microsoftPublisherId, deviceInformation.microsoftPublisherId) &&
-        Objects.equals(this.fireAdvertisingId, deviceInformation.fireAdvertisingId);
+        Objects.equals(this.fireAdvertisingId, deviceInformation.fireAdvertisingId) &&
+        Objects.equals(this.tizenAdvertisingId, deviceInformation.tizenAdvertisingId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(brand, product, device, androidUuid, deviceManufacturer, platform, osVersion, deviceModel, screenHeight, screenWidth, screenDpi, deviceCountry, localeLanguage, localeCountry, networkCountry, networkCarrier, networkCode, networkMobileCountryCode, timezoneOffset, buildIdentifier, httpHeaderUserAgent, iosAdvertisingId, pushToken, cpuArchitecture, isTablet, pushNotificationSoundEnabled, pushNotificationVibrateEnabled, radioAccessTechnology, supportsTelephony, hasNfc, bluetoothEnabled, bluetoothVersion, attTimestampUnixtimeMs, attAuthorizationStatus, iosIdfv, androidAdvertisingId, buildVersionRelease, limitAdTracking, ampId, isDst, rokuAdvertisingId, rokuPublisherId, microsoftAdvertisingId, microsoftPublisherId, fireAdvertisingId);
+    return Objects.hash(brand, product, device, androidUuid, deviceManufacturer, platform, osVersion, deviceModel, screenHeight, screenWidth, screenDpi, deviceCountry, localeLanguage, localeCountry, networkCountry, networkCarrier, networkCode, networkMobileCountryCode, timezoneOffset, buildIdentifier, httpHeaderUserAgent, iosAdvertisingId, pushToken, cpuArchitecture, isTablet, pushNotificationSoundEnabled, pushNotificationVibrateEnabled, radioAccessTechnology, supportsTelephony, hasNfc, bluetoothEnabled, bluetoothVersion, attTimestampUnixtimeMs, attAuthorizationStatus, iosIdfv, androidAdvertisingId, buildVersionRelease, limitAdTracking, ampId, isDst, rokuAdvertisingId, rokuPublisherId, microsoftAdvertisingId, microsoftPublisherId, fireAdvertisingId, tizenAdvertisingId);
   }
 
 
@@ -1248,6 +1274,7 @@ public class DeviceInformation {
     sb.append("    microsoftAdvertisingId: ").append(toIndentedString(microsoftAdvertisingId)).append("\n");
     sb.append("    microsoftPublisherId: ").append(toIndentedString(microsoftPublisherId)).append("\n");
     sb.append("    fireAdvertisingId: ").append(toIndentedString(fireAdvertisingId)).append("\n");
+    sb.append("    tizenAdvertisingId: ").append(toIndentedString(tizenAdvertisingId)).append("\n");
     sb.append("}");
     return sb.toString();
   }
