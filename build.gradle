@@ -21,7 +21,7 @@ javadoc {
 
 ext {
     oltu_version = "1.0.1"
-    retrofit_version = "2.9.0"
+    retrofit_version = "3.0.0"
     swagger_annotations_version = "1.5.22"
     junit_version = "4.12"
     threetenbp_version = "1.3.5"
