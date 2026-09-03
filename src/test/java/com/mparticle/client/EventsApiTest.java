@@ -30,6 +30,25 @@ public class EventsApiTest {
     }
 
     @Test
+    public void deviceInformationSupportsSamsungTvTizenAdvertisingId() {
+        String tizenAdvertisingId = "11111111-2222-3333-4444-555555555555";
+        DeviceInformation deviceInformation = new DeviceInformation()
+                .platform(DeviceInformation.PlatformEnum.SAMSUNG_TV)
+                .tizenAdvertisingId(tizenAdvertisingId);
+
+        Assert.assertEquals("samsung_tv", DeviceInformation.PlatformEnum.SAMSUNG_TV.getValue());
+        Assert.assertEquals(DeviceInformation.PlatformEnum.SAMSUNG_TV, DeviceInformation.PlatformEnum.fromValue("samsung_tv"));
+        Assert.assertEquals(DeviceInformation.PlatformEnum.SAMSUNG_TV, deviceInformation.getPlatform());
+        Assert.assertEquals(tizenAdvertisingId, deviceInformation.getTizenAdvertisingId());
+
+        Gson gson = new Gson();
+        String json = gson.toJson(deviceInformation);
+        Assert.assertTrue(json.contains("\"tizen_advertising_id\":\"" + tizenAdvertisingId + "\""));
+        DeviceInformation parsedDeviceInformation = gson.fromJson(json, DeviceInformation.class);
+        Assert.assertEquals(tizenAdvertisingId, parsedDeviceInformation.getTizenAdvertisingId());
+    }
+
+    @Test
     public void logStringWtihLogger() {
         Logger.setLogHandler(new DefaultLogHandler());
         Logger.debug("Test");
