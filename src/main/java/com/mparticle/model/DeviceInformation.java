@@ -52,6 +52,8 @@ public class DeviceInformation {
     ROKU("roku"),
     
     OUT_OF_BAND("out_of_band"),
+
+    ALEXA("alexa"),
     
     SMART_TV("smart_tv"),
     
@@ -1291,4 +1293,3 @@ public class DeviceInformation {
   }
 
 }
-

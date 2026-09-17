@@ -49,6 +49,16 @@ public class EventsApiTest {
     }
 
     @Test
+    public void deviceInformationSupportsAlexa() {
+        DeviceInformation deviceInformation = new DeviceInformation()
+                .platform(DeviceInformation.PlatformEnum.ALEXA);
+
+        Assert.assertEquals("alexa", DeviceInformation.PlatformEnum.ALEXA.getValue());
+        Assert.assertEquals(DeviceInformation.PlatformEnum.ALEXA, DeviceInformation.PlatformEnum.fromValue("alexa"));
+        Assert.assertEquals(DeviceInformation.PlatformEnum.ALEXA, deviceInformation.getPlatform());
+    }
+
+    @Test
     public void logStringWtihLogger() {
         Logger.setLogHandler(new DefaultLogHandler());
         Logger.debug("Test");
