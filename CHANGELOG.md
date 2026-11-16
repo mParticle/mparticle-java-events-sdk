@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Pin GitHub Actions workflows to commit SHAs, scope token permissions, and enforce the `zizmor` workflow security scan.
+
 ## [2.9.0] - 2026-09-17
 
 ### Added
