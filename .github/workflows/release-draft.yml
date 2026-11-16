@@ -16,18 +16,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   create-release-pr:
+    permissions:
+      contents: write
+      pull-requests: write
     name: Create Release PR
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Read current version
@@ -42,20 +44,24 @@ jobs:
           level: ${{ github.event.inputs.bump-type || 'patch' }}
 
       - name: Write new version to VERSION
-        run: echo "${{ steps.bump-version.outputs.new_version }}" > VERSION
+        env:
+          NEW_VERSION: ${{ steps.bump-version.outputs.new_version }}
+        run: echo "$NEW_VERSION" > VERSION
 
       - name: Update README.md version references
+        env:
+          NEW_VERSION: ${{ steps.bump-version.outputs.new_version }}
         run: |
-          sed -i "s/implementation 'com.mparticle:server-events-sdk:.*'/implementation 'com.mparticle:server-events-sdk:${{ steps.bump-version.outputs.new_version }}'/g" README.md
-          sed -i "s/<version>.*<\/version>/<version>${{ steps.bump-version.outputs.new_version }}<\/version>/g" README.md
+          sed -i "s/implementation 'com.mparticle:server-events-sdk:.*'/implementation 'com.mparticle:server-events-sdk:${NEW_VERSION}'/g" README.md
+          sed -i "s/<version>.*<\/version>/<version>${NEW_VERSION}<\/version>/g" README.md
 
       - name: Update changelog
-        uses: thomaseizinger/keep-a-changelog-new-release@f62c3c390716df5af712ba5d94f4f4a8efc1306d # v3.1.0
+        uses: thomaseizinger/keep-a-changelog-new-release@f62c3c390716df5af712ba5d94f4f4a8efc1306d # 3.1.0
         with:
           tag: ${{ steps.bump-version.outputs.new_version }}
 
       - name: Install JDK 17
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: "zulu"
           java-version: "17"
@@ -63,9 +69,10 @@ jobs:
 
       - name: Smoke test - publish to Maven local
         env:
+          NEW_VERSION: ${{ steps.bump-version.outputs.new_version }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_CENTRAL_SIGNING_KEY_PASSWORD }}
-        run: ./gradlew publishToMavenLocal -PVERSION=${{ steps.bump-version.outputs.new_version }}
+        run: ./gradlew publishToMavenLocal -PVERSION="$NEW_VERSION"
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
