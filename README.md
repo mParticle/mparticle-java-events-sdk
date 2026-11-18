@@ -8,7 +8,7 @@ This is the mParticle Java SDK for the server-based Events API - use it to send 
 
 > This SDK is designed only to be used in a server-side environment. If you're looking for our Android SDK - [please see here](https://github.com/mparticle/mparticle-android-sdk).
 
-### Requirements.
+### Requirements
 
 Java 1.7 and later.
 
