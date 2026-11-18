@@ -224,7 +224,7 @@ Response<Void> singleResponse = singleResult.execute();
 
 ### Logging
 
-By default, logging is ignored.  Please implement your own LogHandler to handle log statements.
+By default, logging is ignored. Please implement your own LogHandler to handle log statements.
 
 ```java
 Logger.setLogHandler(new DefaultLogHandler());
