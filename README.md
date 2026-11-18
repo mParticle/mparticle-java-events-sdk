@@ -13,7 +13,7 @@ This is the mParticle Java SDK for the server-based Events API - use it to send 
 
 Java 1.7 and later.
 
-## Getting Started 
+## Getting Started
 
 ### Add the Dependency
 
@@ -177,7 +177,7 @@ EventsApi api = new ApiClient("API KEY", "API-SECRET")
                 .createService(EventsApi.class);
 ```
 
-> The mParticle Events API leverages HTTP basic authentication over TLS. 
+> The mParticle Events API leverages HTTP basic authentication over TLS.
 
 ### Perform a Synchronous Upload
 
