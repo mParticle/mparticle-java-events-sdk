@@ -35,6 +35,7 @@ jobs:
     name: Publish to Maven Central
     needs: unit-test
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       contents: read
     env:
