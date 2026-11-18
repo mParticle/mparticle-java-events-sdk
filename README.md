@@ -6,7 +6,7 @@
 
 This is the mParticle Java SDK for the server-based Events API - use it to send your data to the [mParticle platform](https://www.mparticle.com/) and off to 250+ integrations! The SDK is designed to be used in a variety of environments. It provides a [Retrofit](https://square.github.io/retrofit/) interface as well as serializable models if you prefer to handle HTTP transport on your own.
 
-> This SDK is designed only to be used in a server-side environment. If you're looking for our Android SDK - [please see here](https://github.com/mparticle/mparticle-android-sdk).
+> This SDK is designed only to be used in a server-side environment. If you're looking for our Android SDK, see the [mParticle Android SDK](https://github.com/mparticle/mparticle-android-sdk).
 
 ### Requirements.
 
