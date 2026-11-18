@@ -167,7 +167,7 @@ EventsApi api = new ApiClient("API KEY", "API-SECRET")
                 .createService(EventsApi.class);
 ```
 
-By default, the Java SDK will upload to the US1 Data Center URL.  If the API key you're sending to exists in an mParticle Data Center that's not US1, you can find the right URL for your hosting location on the [mParticle docs site](https://docs.mparticle.com/developers/data-localization/#events-api).  You can then override the base url using the following configuration:
+By default, the Java SDK will upload to the US1 Data Center URL. If the API key you're sending to exists in an mParticle Data Center that's not US1, you can find the right URL for your hosting location on the [mParticle docs site](https://docs.mparticle.com/developers/data-localization/#events-api). You can then override the base URL using the following configuration:
 
 ```java
 Retrofit.Builder mybuilder = new Retrofit.Builder().baseUrl("https://s2s.eu1.mparticle.com/v2/").build();
