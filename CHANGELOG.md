@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.10.0] - 2026-11-20
-
 ### Changed
 
 - Pin GitHub Actions workflows to commit SHAs, scope token permissions, and enforce the `zizmor` workflow security scan.
@@ -89,8 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Don't remove attributes when value is set to null
 
-[unreleased]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.10.0...HEAD
-[2.10.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.9.0...v2.10.0
+[unreleased]: https://github.com/mParticle/mparticle-java-events-sdk/compare/2.9.0...HEAD
 [2.9.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/2.8.0...2.9.0
 [2.8.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.7.0...2.8.0
 [2.7.0]: https://github.com/mParticle/mparticle-java-events-sdk/compare/v2.6.0...v2.7.0
