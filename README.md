@@ -36,10 +36,10 @@ implementation 'com.mparticle:server-events-sdk:2.10.0'
 
 #### Local Maven
 
-You can also install it locally and use it from a local Maven repository:
+You can also install it locally and use it from a local Maven repository. Give it a `-SNAPSHOT` version: release versions are signed, so without a signing key a local build of one fails at the signing step.
 
 ```sh
-./gradlew publishToMavenLocal
+./gradlew publishToMavenLocal -PVERSION=<version>-SNAPSHOT
 ```
 
 ## Create a `Batch`

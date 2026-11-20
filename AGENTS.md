@@ -57,15 +57,13 @@ Three different names refer to this one project, and the build uses all three:
 - Unit tests: `./gradlew test`
 - Install locally: `./gradlew publishToMavenLocal -PVERSION=<next>-SNAPSHOT`
 
-### Command traps
+### Command trap
 
-1. **`publishToMavenLocal` fails without a `-SNAPSHOT` version.** `build.gradle` calls
-   `signAllPublications()`, which makes signing *required* for any version not ending in
-   `-SNAPSHOT`, and the Sign task then aborts with no signatory. `-PVERSION` overrides the `VERSION`
-   file for exactly this reason. CI works around it the other way, injecting
-   `ORG_GRADLE_PROJECT_signingInMemoryKey` into its non-SNAPSHOT smoke test.
-2. **`README.md` documents the command that does not work** - its "Local Maven" section still shows
-   a bare `./gradlew publishToMavenLocal`. Use the form above.
+**`publishToMavenLocal` fails without a `-SNAPSHOT` version.** `build.gradle` calls
+`signAllPublications()`, which makes signing *required* for any version not ending in
+`-SNAPSHOT`, and the Sign task then aborts with no signatory. `-PVERSION` overrides the `VERSION`
+file for exactly this reason. CI works around it the other way, injecting
+`ORG_GRADLE_PROJECT_signingInMemoryKey` into its non-SNAPSHOT smoke test.
 
 ## Conventions that no config enforces
 
