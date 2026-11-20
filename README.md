@@ -112,7 +112,7 @@ The following are common properties that all events share, as represented by the
 
 ```
 
-The Java Server Events SDK represents this structure via an event and an event-data class for each unique event type. For example, `CustomEvent` which can be populated by a `CustomEventData` instance.
+The Java Server Events SDK represents this structure via an event and an event-data class for each unique event type. For example, a `CustomEventData` instance populates a `CustomEvent`.
 
 ### Custom Events
 
