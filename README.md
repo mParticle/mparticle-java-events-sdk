@@ -2,7 +2,7 @@
 
 ## Java Server Events SDK
 
-[![Maven Central Status](https://maven-badges.herokuapp.com/maven-central/com.mparticle/server-events-sdk/badge.svg?style=flat-square)](https://search.maven.org/#search%7Cga%7C1%7Cmparticle)
+[![Maven Central](https://img.shields.io/maven-central/v/com.mparticle/server-events-sdk.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/com.mparticle/server-events-sdk)
 
 This is the mParticle Java SDK for the server-based Events API - use it to send your data to the [mParticle platform](https://www.mparticle.com/) and off to 250+ integrations! The SDK is designed to be used in a variety of environments. It provides a [Retrofit](https://square.github.io/retrofit/) interface as well as serializable models if you prefer to handle HTTP transport on your own.
 
@@ -10,7 +10,7 @@ This is the mParticle Java SDK for the server-based Events API - use it to send 
 
 ### Requirements
 
-Java 1.7 and later.
+Java 8 and later.
 
 ## Getting Started
 
@@ -93,7 +93,7 @@ All mParticle events have a similar structure:
 
 The following are common properties that all events share, as represented by the `CommonEventData` class:
 
-```javascript
+```json
 {
 	"data" :
 	{
@@ -170,11 +170,12 @@ EventsApi api = new ApiClient("API KEY", "API-SECRET")
 By default, the Java SDK will upload to the US1 Data Center URL. If the API key you're sending to exists in an mParticle Data Center that's not US1, you can find the right URL for your hosting location on the [mParticle docs site](https://docs.mparticle.com/developers/data-localization/#events-api). You can then override the base URL using the following configuration:
 
 ```java
-Retrofit.Builder mybuilder = new Retrofit.Builder().baseUrl("https://s2s.eu1.mparticle.com/v2/").build();
-EventsApi api = new ApiClient("API KEY", "API-SECRET")
-                .setAdapterBuilder(mybuilder)
-                .createService(EventsApi.class);
+ApiClient client = new ApiClient("API KEY", "API-SECRET");
+client.getAdapterBuilder().baseUrl("https://s2s.eu1.mparticle.com/v2/");
+EventsApi api = client.createService(EventsApi.class);
 ```
+
+> Change the base URL on the existing adapter builder, as above, rather than passing a new `Retrofit.Builder` to `setAdapterBuilder`: the default builder carries the SDK's JSON converters, which a new builder would not have.
 
 > The mParticle Events API leverages HTTP basic authentication over TLS.
 
@@ -224,13 +225,35 @@ Response<Void> singleResponse = singleResult.execute();
 
 ### Logging
 
-By default, logging is ignored. Please implement your own LogHandler to handle log statements.
+By default, logging is ignored. To receive the SDK's log statements, extend `Logger.AbstractLogHandler` and install it:
 
 ```java
-Logger.setLogHandler(new DefaultLogHandler());
-Logger.debug("Statement");
+Logger.setLogHandler(new Logger.AbstractLogHandler() {
+    @Override
+    public void debug(String message) {
+        System.out.println("DEBUG: " + message);
+    }
+
+    @Override
+    public void info(String message) {
+        System.out.println("INFO: " + message);
+    }
+
+    @Override
+    public void error(Throwable error, String message) {
+        System.err.println("ERROR: " + message);
+    }
+});
 ```
 
-### License
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for build, test and pull request conventions, and [CHANGELOG.md](CHANGELOG.md) for release history. To report a security vulnerability, follow [SECURITY.md](SECURITY.md) rather than opening an issue.
+
+## Support
+
+Questions? Have an issue? Read the [Events API docs](https://docs.mparticle.com/developers/server/http/) or contact our **Customer Success** team at <support@mparticle.com>.
+
+## License
 
 [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
